@@ -1,0 +1,53 @@
+.loginstatus {
+    display: flex;
+    justify-content: end;
+}
+
+.category > h1 {
+    background-color: lightblue;
+    height: 40px;
+    display: flex;
+    justify-content: center;
+}
+
+.category > a   {
+    background-color: lightblue;
+    height: 30px;
+    display: flex;
+    justify-content: end;
+}
+
+.category > h2   {
+    background-color: lightblue;
+    height: 30px;
+    display: flex;
+    justify-content: center;
+}
+
+.box > h1 {
+    display: flex;
+    justify-content: center;
+}
+
+form {
+    width: 50%;
+    margin: 30px auto;
+    border-radius: 5px;
+    padding: 10px;
+    background: #fff8dc;
+    border: 1px solid #6b8e23;
+}
+
+.btn {
+    border-radius: 10px;
+    background: #fff8dc;
+    border: 1px solid #6b8e23;
+    height: 40px;
+    padding: 5px 20px;
+    cursor: pointer;
+}
+
+.uitgaves > h1 {
+    display: flex;
+    justify-content: center;
+}
