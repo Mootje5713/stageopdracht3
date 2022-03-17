@@ -3,7 +3,6 @@ include "connection.php";
 if (!isset($_GET['id'])) {
     header("location: index.php");
 }
-
         $query = "SELECT * FROM `kosten` WHERE user_id='".$_SESSION["user_id"]."' AND categorie_id = '".$_GET['id']."' ORDER BY id DESC";
         $result=$conn->query($query);
         if ( $result === FALSE) {
@@ -47,36 +46,38 @@ if (!isset($_GET['id'])) {
 
 <?php include "header.php"; ?>
 <div class="category">
-    <a href="addamount.php?id=<?php echo $_GET['id']?>">Voeg een bedrag toe</a>
-    <h1>categorie</h1>
+        <a href="index.php">Terug</a>
+        <a href="addamount.php?id=<?php echo $_GET['id']?>">Voeg een bedrag toe</a>
     <?php foreach ($categorie as $row): ?> 
-        <h2><?php echo $row['categorie']?></h2>
+        <h1><?php echo $row['categorie']?></h1>
+    <?php endforeach; ?>
+    </div>
         <?php if(empty($row['totaal'])): ?>
         <h2>Je hebt nog niks uitgegven aan deze categorie<?php echo $row['totaal']; ?></h2>
         <?php else: ?>
         <h2>Je hebt in totaal &euro;<?php echo $row['totaal']; ?>
         aan deze categorie uitgegeven.</h2>
-    <?php endif; ?>
-    <?php endforeach; ?>
-    </div>
-    <p><a href="index.php">Terug</a></p>
-
-<table class="charts-css column show-4-secondary-axes">
-    <tbody>
+        <?php endif; ?>
     <?php foreach ($bedrag as $row): ?>   
         <ul>
             <li>
                 Bedrag &euro;
+                <?php if(($row['deleted']) == ''):?>
                     <?php echo $row['bedrag'];?>
                     <br>
                     Om <?php echo $row['tijdstip']; ?>
-                <tr style="--color: <?php if($row['bedrag']/10)
-                    echo "red"; else echo "gray"; ?>;">  
-                </tr>
+                    <br>
+                    <a href="deleteamount.php?id=<?php echo $row['id']?>">bedrag verwijderen</a>
+                    <a href="updateamount.php?id=<?php echo $row['id']?>">bedrag wijzigen</a>
+                <?php else: ?>
+                    <s><?php echo $row['bedrag'];?></s>
+                    <a href="undelete.php?id=<?php echo $row['id']?>">bedrag terughalen</a>
+                <?php endif; ?>
             </li>    
         </ul>
-    </tbody>
-</table>
 <?php endforeach; ?>
+
+
+
 
 <?php include "footer.php"; ?>

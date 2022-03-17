@@ -19,8 +19,9 @@
 ?>
 
 <?php include "header.php"; ?>
-<p><a href="index.php">Terug</a></p>
-<form method="POST">
+<div class="category">
+<a href="categorie.php">Terug</a>
+</div><form method="POST">
     <input type="text" name="categorie" required>
     <button type="submit" class="btn"  name="submit"> Voeg categorie toe </button>
 </form>

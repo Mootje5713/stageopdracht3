@@ -4,25 +4,18 @@
 }
 
 .category > h1 {
-    background-color: lightblue;
     height: 40px;
     display: flex;
     justify-content: center;
 }
 
-.category > a   {
+.category > a  {
     background-color: lightblue;
     height: 30px;
     display: flex;
-    justify-content: end;
+    justify-content: flex-start;
 }
 
-.category > h2   {
-    background-color: lightblue;
-    height: 30px;
-    display: flex;
-    justify-content: center;
-}
 
 .box > h1 {
     display: flex;

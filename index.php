@@ -9,6 +9,7 @@
         echo "error" . $categorie . "<br />" . $conn->error;
     }
 }
+
     $query = "SELECT * FROM `categorieen` WHERE user_id='".$_SESSION["user_id"]."' ORDER BY id DESC";
     $result=$conn->query($query);
     if ( $conn->query($query) === FALSE) {
@@ -24,10 +25,13 @@
     $conn->close();
 ?>
 
+
 <?php include "header.php"; ?>
 <div class="category">
     <a href="addcategory.php">Voeg een categorie toe</a>
-    <h1>categorie</h1>
+    <a href="addtoallcategories.php">Voeg een extra bedrag toe</a>
+
+    <h1>categorieen</h1>
 </div>
 
 <?php if (!isset($categorie)): 
@@ -40,8 +44,7 @@
         <table>
             <tr>
             <a href="categorie.php?id=<?php echo $row['id']?>">
-                <h2><?php echo $row['categorie']?></h2>
-            </a>
+                <h2><?php echo $row['categorie']?></a></h2>
             </tr>
         </table>
         </li>
