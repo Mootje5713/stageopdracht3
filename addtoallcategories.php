@@ -5,7 +5,7 @@ include "functions.php";
 if (isset($_POST['submit'])) {
     $bedrag = $_POST['bedrag'];
     $user_id =  $_SESSION['user_id'];
-    $query = "SELECT id FROM `categorieen` WHERE user_id = '".$_SESSION['user_id']."'";
+    $query = "SELECT * FROM `categorieen` WHERE user_id = '".$_SESSION['user_id']."'";
     $result=$conn->query($query);
     if ($result === FALSE) {
         echo "error" . $query . "<br />" . $conn->error;
@@ -13,12 +13,18 @@ if (isset($_POST['submit'])) {
         if ($result->num_rows>0) {
             while($row=$result->fetch_assoc())
             {
-                $categorie[] = $row['id'];
+                $categorie_ids[] = $row['id'];
             }
         }
     }
-    foreach($categorie as $key => $value) {
-        addamount($bedrag, $value, $user_id, $conn);
+
+
+    if (!empty($categorie_ids)) {
+        foreach($categorie_ids as $key => $value):
+            addamount($bedrag, $value, $user_id, $conn);
+        endforeach;
+    } else { 
+        header("Location: index.php");
     }
 }
 

@@ -9,8 +9,8 @@
         echo "error" . $categorie . "<br />" . $conn->error;
     }
 }
-
-    $query = "SELECT * FROM `categorieen` WHERE user_id='".$_SESSION["user_id"]."' ORDER BY id DESC";
+$categorietotalen = [];
+    $query = "SELECT * FROM `categorieen` WHERE user_id='".$_SESSION["user_id"]."' ORDER BY id ASC";
     $result=$conn->query($query);
     if ( $conn->query($query) === FALSE) {
         echo "error" . $query . "<br />" . $conn->error;
@@ -19,6 +19,7 @@
             while($row=$result->fetch_assoc())
             {
                 $categorie[] = $row;
+                $categorietotalen[$row['id']] = $row['totaal'];
             }
         }
     }
@@ -33,11 +34,14 @@
 
     <h1>categorieen</h1>
 </div>
-
+<h2>Je hebt in totaal <?php echo array_sum($categorietotalen);?> uitgegeven aan 
+alle categorieen</h2>
 <?php if (!isset($categorie)): 
     echo "<h3>Je hebt nog geen categorieen toegevoegd!!</h3>";    
         else: 
         ?>
+                
+
 <?php foreach ($categorie as $row): ?> 
     <ul>
         <li>
@@ -45,6 +49,7 @@
             <tr>
             <a href="categorie.php?id=<?php echo $row['id']?>">
                 <h2><?php echo $row['categorie']?></a></h2>
+                <?php echo ($categorietotalen[$row['id']]);?>
             </tr>
         </table>
         </li>
